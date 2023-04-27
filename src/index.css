@@ -35,6 +35,9 @@
 @import url(./blocks/element/__like-counter/element__like-counter.css);
 @import url(./blocks/element/__trash-button/element__trash-button.css);
 
+/*authentication*/
+@import url(./blocks/authentication/authentication.css);
+
 /* Footer */
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);

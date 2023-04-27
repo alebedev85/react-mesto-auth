@@ -1,8 +1,12 @@
 import React from 'react';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import ProtectedRouteElement from "./ProtectedRoute.js";
 import '../index.css';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
+import Login from './Login';
+import Register from './Register';
 
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -26,6 +30,9 @@ function App() {
   const [deletedCard, setDeletedCard] = React.useState({}); //State for deleted card for ImagePopup
 
   const [isLoading, setIsLoading] = React.useState(false); //State for standart button text
+
+  const [loggedIn, setLoggedIn] = React.useState(true);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     //Get user info
@@ -194,17 +201,33 @@ function App() {
       <CardsContext.Provider value={cards}>
         <div className="page">
 
+          {/* {loggedIn && <NavBar />}
+        <Routes>
+          <Route path="/" element={loggedIn ? <Navigate to="/diary" replace /> : <Navigate to="/login" replace />} />
+          <Route path="/diary" element={<ProtectedRouteElement element={Diary} loggedIn={loggedIn}/>} />
+          <Route path="/tips" element={<ProtectedRouteElement element={Tips} loggedIn={loggedIn}/>} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        </Routes> */}
+
           <Header />
 
-          <Main
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onClose={closeAllPopups}
-            onCardClick={handleCardClick}
-            onDeleteClick={handleDeleteClick}
-            onCardLike={handleCardLike} />
-          <Footer />
+          <Routes>
+            <Route path="mesto-react/" element={<Login />}/>
+            <Route path="mesto-react/main" element={
+              <>
+                <Main
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onClose={closeAllPopups}
+                  onCardClick={handleCardClick}
+                  onDeleteClick={handleDeleteClick}
+                  onCardLike={handleCardLike} />
+                <Footer />
+              </>} />
+          </Routes>
+
 
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
