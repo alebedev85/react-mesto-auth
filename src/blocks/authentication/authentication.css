@@ -7,7 +7,7 @@
 }
 
 .authentication__container {
-  color:#FFFFFF;
+  color: #FFFFFF;
   width: 430px;
   height: 100%;
   padding: 34px 36px 37px;
@@ -24,7 +24,7 @@
   }
 }
 
-.authentication__title{
+.authentication__title {
   margin: 0;
   padding: 0;
   font-style: normal;
@@ -118,4 +118,26 @@
     line-height: 17px;
     min-height: 46px;
   }
+}
+
+.authentication__button-link {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+  min-height: 50px;
+  background-color: #000000;
+  color: #FFFFFF;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.authentication__button-link:hover {
+  opacity: 0.60;
 }

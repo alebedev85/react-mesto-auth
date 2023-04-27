@@ -22,7 +22,7 @@ export default function Login({ onSubmit }) {
               <input
                 id="passward-input"
                 className="authentication__input authentication__input_passward"
-                type="text"
+                type="password"
                 placeholder="Пароль"
                 name="inputPassward"
                 minLength="2"

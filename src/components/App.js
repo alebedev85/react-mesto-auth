@@ -213,8 +213,9 @@ function App() {
           <Header />
 
           <Routes>
-            <Route path="mesto-react/" element={<Login />}/>
-            <Route path="mesto-react/main" element={
+            <Route path="mesto-react/sign-in" element={<Login />}/>
+            <Route path="mesto-react/sign-up" element={<Register />}/>
+            <Route path="mesto-react/" element={
               <>
                 <Main
                   onEditProfile={handleEditProfileClick}
