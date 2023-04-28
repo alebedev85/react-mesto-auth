@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRouteElement from "./ProtectedRoute.js";
 import '../index.css';
 import Header from './Header.js';
@@ -31,7 +31,11 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(false); //State for standart button text
 
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [userData, setUserData] = React.useState({ email: '', password: ''});
+  const [loggedIn, setIsLoggedIn] = React.useState(false);
+  const [token, setToken]= React.useState('');
+  const [registerError, setRegisterError]= React.useState('');
+  const [loginError, setLoginError]= React.useState('');
   const navigate = useNavigate();
 
   React.useEffect(() => {
