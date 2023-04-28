@@ -1,9 +1,9 @@
 import useForm from "../hooks/useForm"
 
 export default function Login({ loginUser }) {
-  const  {form, handleChange} = useForm({
+  const  {form, handleChange, errors} = useForm({
     email: '',
-    password: '',
+    password: ''
   })
 
   const handleSubmit = (e) => {
@@ -22,14 +22,16 @@ export default function Login({ loginUser }) {
               <input
                 id="email-input"
                 className="authentication__input authentication__input_email"
-                type="text"
+                type="email"
                 placeholder="Email"
                 name="email"
                 minLength="2"
                 maxLength="40"
-                value={form.name}
+                value={form.email}
                 onChange={handleChange}
-                required />
+                required
+                noValidate />
+                <span className="authentication__input-error">{errors.email}</span>
             </div>
             <div className="authentication__field">
               <input
@@ -42,7 +44,9 @@ export default function Login({ loginUser }) {
                 maxLength="200"
                 value={form.password}
                 onChange={handleChange}
-                required />
+                required
+                noValidate />
+                <span className="authentication__input-error">{errors.password}</span>
             </div>
             <button className="authentication__submit-button" type="submit" name="authenticationSubmit">Войти</button>
           </fieldset>

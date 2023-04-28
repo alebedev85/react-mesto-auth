@@ -84,11 +84,6 @@
   margin-bottom: 31px;
 }
 
-/* .popup__input:focus {
-  outline: 2px solid blue;
-  border-radius: 2px;
-} */
-
 .authentication__submit-button {
   margin: 186px 0 0;
   padding: 0;
@@ -137,4 +132,15 @@
 
 .authentication__link:hover {
   opacity: 0.60;
+}
+
+.authentication__input-error {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  position: absolute;
+  top: 32px;
+  left: 0;
+  transition: 0.3s;
 }

@@ -2,7 +2,7 @@ import useForm from "../hooks/useForm"
 import { Link } from "react-router-dom"
 
 export default function Register({ regUser }) {
-  const  {form, handleChange} = useForm({
+  const  {form, handleChange, errors} = useForm({
     email: '',
     password: '',
   })
@@ -22,14 +22,16 @@ export default function Register({ regUser }) {
               <input
                 id="email-input"
                 className="authentication__input authentication__input_email"
-                type="text"
+                type="email"
                 placeholder="Email"
                 name="email"
                 minLength="2"
                 maxLength="40"
-                value={form.name}
+                value={form.email}
                 onChange={handleChange}
-                required />
+                required
+                noValidate />
+                <span className="authentication__input-error">{errors.email}</span>
             </div>
             <div className="authentication__field">
               <input
@@ -42,7 +44,9 @@ export default function Register({ regUser }) {
                 maxLength="200"
                 value={form.password}
                 onChange={handleChange}
-                required />
+                required
+                noValidate />
+                <span className="authentication__input-error">{errors.password}</span>
             </div>
             <button className="authentication__submit-button" type="submit" name="authenticationSubmit">Зарегистрироваться</button>
           </fieldset>

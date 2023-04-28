@@ -5,17 +5,21 @@ import { useState } from "react"
  * @returns form - state, handleChange - function
  */
 export default function useForm (initialState) {
-  const [form, setForm] = useState({
-    email: '',
-    password: '',
-  })
+  const [form, setForm] = useState(initialState);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
+    const input = e.target;
+    setErrors({
+      ...errors,
+      [input.name]: input.validationMessage
+    })
+
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [input.name]: input.value
     })
   }
 
-  return {form, handleChange}
+  return {form, handleChange, errors}
 }
