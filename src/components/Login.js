@@ -1,23 +1,15 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import useForm from "../hooks/useForm"
 
 export default function Login({ loginUser }) {
-  const [user, setUser] = useState({
+  const  {form, handleChange} = useForm({
     email: '',
     password: '',
   })
 
-  const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value
-    })
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user)
-    // loginUser(user)
+    console.log(form)
+    // loginUser(form)
   }
 
   return (
@@ -35,7 +27,7 @@ export default function Login({ loginUser }) {
                 name="email"
                 minLength="2"
                 maxLength="40"
-                value={user.name}
+                value={form.name}
                 onChange={handleChange}
                 required />
             </div>
@@ -48,7 +40,7 @@ export default function Login({ loginUser }) {
                 name="password"
                 minLength="2"
                 maxLength="200"
-                value={user.password}
+                value={form.password}
                 onChange={handleChange}
                 required />
             </div>

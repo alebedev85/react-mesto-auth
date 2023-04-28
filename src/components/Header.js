@@ -8,7 +8,7 @@ export default function Header() {
       <nav className="header_menu">
       <NavLink to="mesto-react/" className={'header_link'}>Mesto</NavLink>
       <NavLink to="mesto-react/sign-in" className={'header_link'}>Login</NavLink>
-      <NavLink to="mesto-react/sign-up" className={'header_link'}>Gegister</NavLink>
+      <NavLink to="mesto-react/sign-up" className={'header_link'}>Register</NavLink>
       </nav>
     </header>
   )
