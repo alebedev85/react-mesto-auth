@@ -5,10 +5,30 @@
   box-sizing: border-box;
   max-width: 880px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
+.header_menu {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  height: 100%;
+}
+
+.header_link {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.header_link:hover {
+  opacity: 0.60;
+}
+
+
 @media screen and (max-width: 320px) {
-  .header{
+  .header {
     padding-top: 28px;
     min-height: 84px;
   }

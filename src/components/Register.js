@@ -54,7 +54,9 @@ export default function Register({ regUser }) {
             <button className="authentication__submit-button" type="submit" name="authenticationSubmit">Зарегистрироваться</button>
           </fieldset>
         </form>
-        <button className="authentication__button-link" type="submit" name="authenticationSubmit">Уже зарегистрированы? Войти</button>
+        <div className="authentication__link">
+          <Link to='/mesto-react/sign-in' style={{textDecoration: 'none', color: '#FFFFFF'}}>Уже зарегистрированы? Войти</Link>
+          </div>
       </div>
     </div >
   )

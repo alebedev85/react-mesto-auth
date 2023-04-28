@@ -120,17 +120,14 @@
   }
 }
 
-.authentication__button-link {
-  margin: 0;
+.authentication__link {
+  margin: 16px 0 0;
   padding: 0;
-  border: none;
-  font: inherit;
   cursor: pointer;
   width: 100%;
-  min-height: 50px;
+  height: 100%;
   background-color: #000000;
   color: #FFFFFF;
-  border-radius: 2px;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -138,6 +135,6 @@
   text-align: center;
 }
 
-.authentication__button-link:hover {
+.authentication__link:hover {
   opacity: 0.60;
 }
