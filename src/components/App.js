@@ -15,6 +15,7 @@ import DeleteCardPopup from './DeleteCardPopup';
 import ImagePopup from './ImagePopup';
 
 import { api } from '../utils/Api';
+import * as authApi from '../utils/AuthApi';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import { CardsContext } from './contexts/CardsContext';
 
@@ -31,12 +32,29 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(false); //State for standart button text
 
-  const [userData, setUserData] = React.useState({ email: '', password: ''});
+  const [userData, setUserData] = React.useState({ email: '', password: '' });
   const [loggedIn, setIsLoggedIn] = React.useState(false);
-  const [token, setToken]= React.useState('');
-  const [registerError, setRegisterError]= React.useState('');
-  const [loginError, setLoginError]= React.useState('');
+  const [token, setToken] = React.useState('');
+  const [registerError, setRegisterError] = React.useState('');
+  const [loginError, setLoginError] = React.useState('');
   const navigate = useNavigate();
+
+  /**
+   * Handler to registrat user
+   * @param {string} name - new name.
+   * @param {string} description - new description.
+   */
+  function handlerRegUser({ email, password }) {
+    authApi.register(email, password)
+      .then((newUserData) => {
+        setUserData(newUserData);
+        console.log(newUserData)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    // .finally(() => setIsLoading(false));
+  }
 
   React.useEffect(() => {
     //Get user info
@@ -217,8 +235,9 @@ function App() {
           <Header />
 
           <Routes>
-            <Route path="mesto-react/sign-in" element={<Login />}/>
-            <Route path="mesto-react/sign-up" element={<Register />}/>
+            <Route path="mesto-react/sign-in" element={<Login />} />
+            <Route path="mesto-react/sign-up" element={<
+              Register regUser={handlerRegUser} />} />
             <Route path="mesto-react/" element={
               <>
                 <Main

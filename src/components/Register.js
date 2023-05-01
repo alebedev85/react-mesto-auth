@@ -2,15 +2,14 @@ import useForm from "../hooks/useForm"
 import { Link } from "react-router-dom"
 
 export default function Register({ regUser }) {
-  const  {form, handleChange, errors} = useForm({
+  const { form, handleChange, errors } = useForm({
     email: '',
     password: '',
   })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form)
-    // regUser(form)
+    regUser(form)
   }
   return (
     <div className={"authentication"}>
@@ -31,7 +30,7 @@ export default function Register({ regUser }) {
                 onChange={handleChange}
                 required
                 noValidate />
-                <span className="authentication__input-error">{errors.email}</span>
+              <span className="authentication__input-error">{errors.email}</span>
             </div>
             <div className="authentication__field">
               <input
@@ -46,14 +45,14 @@ export default function Register({ regUser }) {
                 onChange={handleChange}
                 required
                 noValidate />
-                <span className="authentication__input-error">{errors.password}</span>
+              <span className="authentication__input-error">{errors.password}</span>
             </div>
             <button className="authentication__submit-button" type="submit" name="authenticationSubmit">Зарегистрироваться</button>
           </fieldset>
         </form>
         <div className="authentication__link">
           <Link to='/mesto-react/sign-in' className="header_link">Уже зарегистрированы? Войти</Link>
-          </div>
+        </div>
       </div>
     </div >
   )
