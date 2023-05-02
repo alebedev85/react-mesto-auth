@@ -1,52 +1,58 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
-export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
-    method: 'POST',
+/**
+   * Common request funstion
+   * @param {string} url - end point of requets.
+   * @param {string} method - method of requets.
+   * @param {object} body - body of requets.
+   * @param {string} token - personal token.
+   * @returns respons in json format
+   */
+const makeRequest = (url, method, body, token) => {
+  const options = {
+    method,
     headers: {
       "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email: email, password: password })
-  })
-    .then((res) => {
-      return res.json()
-    })
-    .then((JWT) => {
-      return JWT
-    })
-    .catch((err) => console.log(err))
-}
-
-export const register = (email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email: email, password: password })
-  })
-    .then((res) => {
-      return res.json()
-    })
-    .then((data) => {
-      return data
-    })
-    .catch((err) => console.log(err))
-}
-
-export const checkUser = (JWT) => {
-  return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${JWT}`
     }
-  })
-    .then((res) => {
-      return res.json()
-    })
-    .then((res) => {
-      return res
-    })
-    .catch((err) => console.log(err))
+  }
+
+  if (body) {
+    options.body = JSON.stringify(body)
+  }
+
+  if (token) {
+    options.headers.Authorization = `Bearer ${token}`
+  }
+
+  return fetch(`${BASE_URL}/${url}`, options)
+  .then((res) => res.json())
+}
+
+/**
+ * Aototrization request
+ * @param {string} email
+ * @param {string} password
+ * @returns respons in json format
+ */
+export const authorize = (email, password) => {
+  return makeRequest('signin', 'POST', { email, password })
+}
+
+/**
+ * Registration request
+ * @param {string} email
+ * @param {string} password
+ * @returns respons in json format
+ */
+export const register = (email, password) => {
+  return makeRequest('signup', 'POST', { email, password })
+}
+
+/**
+ * Authentication request
+ * @param {token} email
+ * @returns respons in json format
+ */
+export const checkUser = (token) => {
+  return makeRequest('users/me', 'GET', null, token)
 }

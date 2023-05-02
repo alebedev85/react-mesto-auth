@@ -40,15 +40,15 @@ function App() {
   const navigate = useNavigate();
 
   /**
-   * Handler to registrat user
+   * Handler to user registration
    * @param {string} name - new name.
    * @param {string} description - new description.
    */
   function handlerRegUser({ email, password }) {
     authApi.register(email, password)
-      .then((newUserData) => {
-        setUserData(newUserData);
-        console.log(newUserData)
+      .then(({ data }) => {
+        setUserData(data);
+        console.log(data)
       })
       .catch(err => {
         console.log(err)
