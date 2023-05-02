@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import ProtectedRouteElement from "./ProtectedRoute.js";
 import '../index.css';
 import Header from './Header.js';
@@ -32,9 +32,9 @@ function App() {
 
   const [isLoading, setIsLoading] = React.useState(false); //State for standart button text
 
-  const [userData, setUserData] = React.useState({ email: '', password: '' });
-  const [loggedIn, setIsLoggedIn] = React.useState(false);
-  const [token, setToken] = React.useState('');
+  const [userData, setUserData] = React.useState({ email: '', _id: '' });
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [token, setToken] = React.useState('111');
   const [registerError, setRegisterError] = React.useState('');
   const [loginError, setLoginError] = React.useState('');
   const navigate = useNavigate();
@@ -45,10 +45,12 @@ function App() {
    * @param {string} description - new description.
    */
   function handlerRegUser({ email, password }) {
+    // debugger
     authApi.register(email, password)
       .then(({ data }) => {
-        setUserData(data);
+        // setUserData(data);
         console.log(data)
+        navigate('mesto-react/sign-in', {replace: true});
       })
       .catch(err => {
         console.log(err)
@@ -56,7 +58,46 @@ function App() {
     // .finally(() => setIsLoading(false));
   }
 
+  /**
+  * Handler to user authorizetion
+  * @param {string} name - new name.
+  * @param {string} description - new description.
+  */
+  function handlerAuthorize({ email, password }) {
+    authApi.authorize(email, password)
+      .then(({ token }) => {
+        console.log(token)
+        localStorage.setItem('token', token);
+        setToken(token)
+        navigate('mesto-react/', {replace: true});
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    // .finally(() => setIsLoading(false));
+  }
+
+  function logOut() {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setToken('');
+    setUserData({ email: '', _id: '' });
+    navigate('mesto-react/sign-up', {replace: true});
+  }
+
   React.useEffect(() => {
+    authApi.getUserData(token)
+      .then(({ data }) => {
+        setUserData(data);
+        setIsLoggedIn(true);
+      })
+      .catch(err =>
+        console.log(err))
+  }, [token])
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    setToken(token)
     //Get user info
     api.getCurrentUser()
       .then((res) => {
@@ -64,7 +105,7 @@ function App() {
       })
       .catch(err => {
         console.log(err);
-      })
+      });
 
     //Get cards
     api.getCards()
@@ -235,9 +276,11 @@ function App() {
           <Header />
 
           <Routes>
-            <Route path="mesto-react/sign-in" element={<Login />} />
-            <Route path="mesto-react/sign-up" element={<
-              Register regUser={handlerRegUser} />} />
+          <Route path="*" element={isLoggedIn ? <Navigate to="mesto-react/" replace /> : <Navigate to="mesto-react/sign-up" replace />} />
+            <Route path="mesto-react/sign-in" element={
+              <Login loginUser={handlerAuthorize} />} />
+            <Route path="mesto-react/sign-up" element={
+              <Register regUser={handlerRegUser} />} />
             <Route path="mesto-react/" element={
               <>
                 <Main

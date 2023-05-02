@@ -9,7 +9,7 @@ export default function Login({ loginUser }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form)
-    // loginUser(form)
+    loginUser(form)
   }
 
   return (
