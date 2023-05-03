@@ -66,3 +66,5 @@
 @import url(./blocks/popup/__form/_type_delete/popup__form_type_delete.css);
 /*Delete form*/
 @import url(./blocks/popup/__container/_type_edit-avatar/popup__container_type_edit-avatar.css);
+
+@import url(./blocks/popup/_type_info-tool/poup_type_info-tool.css);

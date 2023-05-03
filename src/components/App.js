@@ -7,13 +7,13 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import Login from './Login';
 import Register from './Register';
-import NavBar from './NavBar.js';
 
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPopup';
 import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip.js';
 
 import { api } from '../utils/Api';
 import * as authApi from '../utils/AuthApi';
@@ -35,9 +35,6 @@ function App() {
 
   const [userData, setUserData] = React.useState({ email: '', _id: '' });
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-  const [token, setToken] = React.useState('');
-  const [registerError, setRegisterError] = React.useState('');
-  const [loginError, setLoginError] = React.useState('');
   const navigate = useNavigate();
 
   /**
@@ -67,7 +64,6 @@ function App() {
     authApi.authorize(email, password)
       .then(({ token }) => {
         localStorage.setItem('jwt', token);
-        setToken(token);
         navigate('/', { replace: true });
       })
       .catch(err => {
@@ -79,7 +75,6 @@ function App() {
   function logOut() {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
-    setToken('');
     setUserData({ email: '', _id: '' });
     navigate('/sign-up', { replace: true });
   }
@@ -100,33 +95,16 @@ function App() {
 
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt');
-    // console.log(jwt)
     if (jwt) {
-      // setToken(jwt)
       authApi.getUserData(jwt)
         .then((res) => {
           if (res) {
             const data = res.data
             setUserData({ email: data.email, _id: data._id });
             setIsLoggedIn(true);
-            setToken(jwt)
           }
         })
     }
-
-    // if (localStorage.getItem('token')) {
-    //   setToken(localStorage.getItem('token'))
-    //   console.log(token)
-    //   authApi.getUserData(token)
-    //     .then((res) => {
-    //       if (res) {
-    //         const data = res.data
-    //         setUserData({ email: data.email, _id: data._id });
-    //         setIsLoggedIn(true);
-    //       }
-    //     })
-    //     .catch(err =>
-    //       console.log(err))}
   }
 
   React.useEffect(() => {
@@ -361,6 +339,8 @@ function App() {
             name={'picture'}
             card={selectedCard}
             onClose={closeAllPopups} />
+
+          <InfoTooltip />
         </div>
       </CardsContext.Provider>
     </CurrentUserContext.Provider>
