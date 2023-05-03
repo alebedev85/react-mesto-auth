@@ -8,14 +8,14 @@ export default function Header({ email, logOut, loggedIn }) {
       <nav className="header_menu">
         {loggedIn ?
           <>
-          <NavLink to="mesto-react/" className={'header_link'}>Mesto</NavLink>
+          <NavLink to="/" className={'header_link'}>Mesto</NavLink>
             <p className={'header_link header_text'}>{email}</p>
             <button type="button" className={'header_link header_button'} onClick={logOut}>Выйти</button>
           </> :
           <>
-            <NavLink to="mesto-react/" className={'header_link'}>Mesto</NavLink>
-            <NavLink to="mesto-react/sign-in" className={'header_link'}>Войти</NavLink>
-            <NavLink to="mesto-react/sign-up" className={'header_link'}>Регистрация</NavLink>
+            <NavLink to="/" className={'header_link'}>Mesto</NavLink>
+            <NavLink to="/sign-in" className={'header_link'}>Войти</NavLink>
+            <NavLink to="/sign-up" className={'header_link'}>Регистрация</NavLink>
           </>}
       </nav>
     </header>

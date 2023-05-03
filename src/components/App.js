@@ -34,7 +34,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false); //State for standart button text
 
   const [userData, setUserData] = React.useState({ email: '', _id: '' });
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [token, setToken] = React.useState('');
   const [registerError, setRegisterError] = React.useState('');
   const [loginError, setLoginError] = React.useState('');
@@ -50,7 +50,7 @@ function App() {
       .then(({ data }) => {
         // setUserData(data);
         console.log(data)
-        navigate('mesto-react/sign-in', { replace: true });
+        navigate('/sign-in', { replace: true });
       })
       .catch(err => {
         console.log(err)
@@ -68,7 +68,7 @@ function App() {
       .then(({ token }) => {
         localStorage.setItem('jwt', token);
         setToken(token);
-        navigate('mesto-react/', { replace: true });
+        navigate('/', { replace: true });
       })
       .catch(err => {
         console.log(err)
@@ -81,7 +81,7 @@ function App() {
     setIsLoggedIn(false);
     setToken('');
     setUserData({ email: '', _id: '' });
-    navigate('mesto-react/sign-up', { replace: true });
+    navigate('/sign-up', { replace: true });
   }
 
   // React.useEffect(() => {
@@ -314,7 +314,7 @@ function App() {
             loggedIn={isLoggedIn} />
 
           <Routes>
-            <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-up" replace />} />
+            <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} />
             <Route path="/sign-in" element={
               <Login loginUser={handlerLogIn} />} />
             <Route path="/sign-up" element={
