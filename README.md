@@ -19,4 +19,4 @@
 - модальное окно закрывается по клику в любом месте вне этого окна и по нажатию на Esc.
 
 
-[Ссылка на этот сайт](https://alebedev85.github.io/mesto-react/)
+[Ссылка на этот сайт](https://alebedev85.github.io/react-mesto-auth/)
