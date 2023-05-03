@@ -63,12 +63,11 @@ function App() {
   * @param {string} name - new name.
   * @param {string} description - new description.
   */
-  function handlerAuthorize({ email, password }) {
+  function handlerLogIn({ email, password }) {
     authApi.authorize(email, password)
       .then(({ token }) => {
-        console.log(token)
         localStorage.setItem('token', token);
-        setToken(token)
+        setToken(token);
         navigate('mesto-react/', { replace: true });
       })
       .catch(err => {
@@ -85,18 +84,18 @@ function App() {
     navigate('mesto-react/sign-up', { replace: true });
   }
 
-  // React.useEffect(() => {
-  //   console.log(token)
-  //   authApi.getUserData(token)
-  //     .then(({ data }) => {
-  //       console.log("data ", data)
-  //       setUserData({ email: data.email, _id: data._id });
-  //       console.log("userData", userData)
-  //       setIsLoggedIn(true);
-  //     })
-  //     .catch(err =>
-  //       console.log(err))
-  // }, [token])
+  React.useEffect(() => {
+    if (token) {
+      authApi.getUserData(token)
+        .then(({ data }) => {
+          setUserData({ email: data.email, _id: data._id });
+          setIsLoggedIn(true);
+        })
+        .catch(err =>
+          console.log(err))
+    }
+
+  }, [token])
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -277,26 +276,26 @@ function App() {
         </Routes> */}
 
           <Header
-            // email={userData.email}
+            email={userData.email}
             logOut={logOut} />
           <Routes>
             <Route path="*" element={isLoggedIn ? <Navigate to="mesto-react/" replace /> : <Navigate to="mesto-react/sign-up" replace />} />
             <Route path="mesto-react/sign-in" element={
-              <Login loginUser={handlerAuthorize} />} />
+              <Login loginUser={handlerLogIn} />} />
             <Route path="mesto-react/sign-up" element={
               <Register regUser={handlerRegUser} />} />
             <Route path="mesto-react/" element={<ProtectedRouteElement element={Main}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onEditAvatar={handleEditAvatarClick}
-                onClose={closeAllPopups}
-                onCardClick={handleCardClick}
-                onDeleteClick={handleDeleteClick}
-                onCardLike={handleCardLike}
-                loggedIn={isLoggedIn} />
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onClose={closeAllPopups}
+              onCardClick={handleCardClick}
+              onDeleteClick={handleDeleteClick}
+              onCardLike={handleCardLike}
+              loggedIn={isLoggedIn} />
             } />
           </Routes>
-          {isLoggedIn && <Footer loggedIn={isLoggedIn}/>}
+          {isLoggedIn && <Footer loggedIn={isLoggedIn} />}
 
 
           <EditProfilePopup
