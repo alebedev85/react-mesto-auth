@@ -66,7 +66,7 @@ function App() {
   function handlerLogIn({ email, password }) {
     authApi.authorize(email, password)
       .then(({ token }) => {
-        localStorage.setItem('token', token);
+        localStorage.setItem('jwt', token);
         setToken(token);
         navigate('mesto-react/', { replace: true });
       })
@@ -77,29 +77,62 @@ function App() {
   }
 
   function logOut() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
     setIsLoggedIn(false);
     setToken('');
     setUserData({ email: '', _id: '' });
     navigate('mesto-react/sign-up', { replace: true });
   }
 
-  React.useEffect(() => {
-    if (token) {
-      authApi.getUserData(token)
-        .then(({ data }) => {
-          setUserData({ email: data.email, _id: data._id });
-          setIsLoggedIn(true);
+  // React.useEffect(() => {
+  //   if (token) {
+  //     authApi.getUserData(token)
+  //       .then(({ data }) => {
+  //         setUserData({ email: data.email, _id: data._id });
+  //         setIsLoggedIn(true);
+  //       })
+  //       .catch(err =>
+  //         console.log(err))
+  //   }
+
+  // }, [token])
+
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    // console.log(jwt)
+    if (jwt) {
+      // setToken(jwt)
+      authApi.getUserData(jwt)
+        .then((res) => {
+          if (res) {
+            const data = res.data
+            setUserData({ email: data.email, _id: data._id });
+            setIsLoggedIn(true);
+            setToken(jwt)
+          }
         })
-        .catch(err =>
-          console.log(err))
     }
 
-  }, [token])
+    // if (localStorage.getItem('token')) {
+    //   setToken(localStorage.getItem('token'))
+    //   console.log(token)
+    //   authApi.getUserData(token)
+    //     .then((res) => {
+    //       if (res) {
+    //         const data = res.data
+    //         setUserData({ email: data.email, _id: data._id });
+    //         setIsLoggedIn(true);
+    //       }
+    //     })
+    //     .catch(err =>
+    //       console.log(err))}
+  }
 
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    setToken(token)
+
+    tokenCheck()
+
     //Get user info
     api.getCurrentUser()
       .then((res) => {
@@ -277,14 +310,16 @@ function App() {
 
           <Header
             email={userData.email}
-            logOut={logOut} />
+            logOut={logOut}
+            loggedIn={isLoggedIn} />
+
           <Routes>
-            <Route path="*" element={isLoggedIn ? <Navigate to="mesto-react/" replace /> : <Navigate to="mesto-react/sign-up" replace />} />
-            <Route path="mesto-react/sign-in" element={
+            <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-up" replace />} />
+            <Route path="/sign-in" element={
               <Login loginUser={handlerLogIn} />} />
-            <Route path="mesto-react/sign-up" element={
+            <Route path="/sign-up" element={
               <Register regUser={handlerRegUser} />} />
-            <Route path="mesto-react/" element={<ProtectedRouteElement element={Main}
+            <Route path="/" element={<ProtectedRouteElement element={Main}
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
               onEditAvatar={handleEditAvatarClick}
