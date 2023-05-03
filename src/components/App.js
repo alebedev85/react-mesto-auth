@@ -7,6 +7,7 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import Login from './Login';
 import Register from './Register';
+import NavBar from './NavBar.js';
 
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -34,7 +35,7 @@ function App() {
 
   const [userData, setUserData] = React.useState({ email: '', _id: '' });
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [token, setToken] = React.useState('111');
+  const [token, setToken] = React.useState('');
   const [registerError, setRegisterError] = React.useState('');
   const [loginError, setLoginError] = React.useState('');
   const navigate = useNavigate();
@@ -45,12 +46,11 @@ function App() {
    * @param {string} description - new description.
    */
   function handlerRegUser({ email, password }) {
-    // debugger
     authApi.register(email, password)
       .then(({ data }) => {
         // setUserData(data);
         console.log(data)
-        navigate('mesto-react/sign-in', {replace: true});
+        navigate('mesto-react/sign-in', { replace: true });
       })
       .catch(err => {
         console.log(err)
@@ -69,7 +69,7 @@ function App() {
         console.log(token)
         localStorage.setItem('token', token);
         setToken(token)
-        navigate('mesto-react/', {replace: true});
+        navigate('mesto-react/', { replace: true });
       })
       .catch(err => {
         console.log(err)
@@ -82,18 +82,21 @@ function App() {
     setIsLoggedIn(false);
     setToken('');
     setUserData({ email: '', _id: '' });
-    navigate('mesto-react/sign-up', {replace: true});
+    navigate('mesto-react/sign-up', { replace: true });
   }
 
-  React.useEffect(() => {
-    authApi.getUserData(token)
-      .then(({ data }) => {
-        setUserData(data);
-        setIsLoggedIn(true);
-      })
-      .catch(err =>
-        console.log(err))
-  }, [token])
+  // React.useEffect(() => {
+  //   console.log(token)
+  //   authApi.getUserData(token)
+  //     .then(({ data }) => {
+  //       console.log("data ", data)
+  //       setUserData({ email: data.email, _id: data._id });
+  //       console.log("userData", userData)
+  //       setIsLoggedIn(true);
+  //     })
+  //     .catch(err =>
+  //       console.log(err))
+  // }, [token])
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -273,27 +276,27 @@ function App() {
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         </Routes> */}
 
-          <Header />
-
+          <Header
+            // email={userData.email}
+            logOut={logOut} />
           <Routes>
-          <Route path="*" element={isLoggedIn ? <Navigate to="mesto-react/" replace /> : <Navigate to="mesto-react/sign-up" replace />} />
+            <Route path="*" element={isLoggedIn ? <Navigate to="mesto-react/" replace /> : <Navigate to="mesto-react/sign-up" replace />} />
             <Route path="mesto-react/sign-in" element={
               <Login loginUser={handlerAuthorize} />} />
             <Route path="mesto-react/sign-up" element={
               <Register regUser={handlerRegUser} />} />
-            <Route path="mesto-react/" element={
-              <>
-                <Main
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onEditAvatar={handleEditAvatarClick}
-                  onClose={closeAllPopups}
-                  onCardClick={handleCardClick}
-                  onDeleteClick={handleDeleteClick}
-                  onCardLike={handleCardLike} />
-                <Footer />
-              </>} />
+            <Route path="mesto-react/" element={<ProtectedRouteElement element={Main}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onClose={closeAllPopups}
+                onCardClick={handleCardClick}
+                onDeleteClick={handleDeleteClick}
+                onCardLike={handleCardLike}
+                loggedIn={isLoggedIn} />
+            } />
           </Routes>
+          {isLoggedIn && <Footer loggedIn={isLoggedIn}/>}
 
 
           <EditProfilePopup
