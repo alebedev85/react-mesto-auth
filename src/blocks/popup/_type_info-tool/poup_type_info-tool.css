@@ -19,3 +19,13 @@
   line-height: 29px;
   text-align: center;
 }
+
+@media screen and (max-width: 635px) {
+  .popup__container_type_info  {
+    margin-left: 15px;
+    margin-right: 15px;
+    max-width: 280px;
+    min-height: 308px;
+    padding-top: 50px;
+  }
+}
