@@ -75,6 +75,12 @@
 @import url(./blocks/authentication/__link/authentication__link.css);
 @import url(./blocks/authentication/__link/authentication__input-error.css);
 
+/*NavBar*/
+@import url(./blocks/navbar/navbar.css);
+@import url(./blocks/navbar/__link/navbar__link.css);
+@import url(./blocks/navbar/__link/navbar__text.css);
+@import url(./blocks/navbar/__button/navbar__button.css);
+
 /*Delete form*/
 @import url(./blocks/popup/__container/_type_delete/popup__container_type_delete.css);
 @import url(./blocks/popup/__form/_type_delete/popup__form_type_delete.css);

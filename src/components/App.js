@@ -7,6 +7,7 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import Login from './Login';
 import Register from './Register';
+import NavBar from './NavBar.js';
 
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -305,10 +306,12 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <CardsContext.Provider value={cards}>
         <div className="page">
-          <Header
-            email={userData.email}
-            logOut={logOut}
-            loggedIn={isLoggedIn} />
+          <Header>
+            <NavBar
+              email={userData.email}
+              logOut={logOut}
+              loggedIn={isLoggedIn} />
+          </Header>
           <Routes>
             <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} />
             <Route path="/sign-in" element={

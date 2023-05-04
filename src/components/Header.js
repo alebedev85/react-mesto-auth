@@ -1,23 +1,10 @@
 import logo from '../images/Logo.svg';
-import { NavLink } from 'react-router-dom';
 
-export default function Header({ email, logOut, loggedIn }) {
+export default function Header({ children }) {
   return (
     <header className="header">
       <a href="#"><img src={logo} className="header__logo" alt="Логотип Место" /></a>
-      <nav className="header_menu">
-        {loggedIn ?
-          <>
-          <NavLink to="/" className={'header_link'}>Mesto</NavLink>
-            <p className={'header_link header_text'}>{email}</p>
-            <button type="button" className={'header_link header_button'} onClick={logOut}>Выйти</button>
-          </> :
-          <>
-            <NavLink to="/" className={'header_link'}>Mesto</NavLink>
-            <NavLink to="/sign-in" className={'header_link'}>Войти</NavLink>
-            <NavLink to="/sign-up" className={'header_link'}>Регистрация</NavLink>
-          </>}
-      </nav>
+      {children}
     </header>
   )
 }
