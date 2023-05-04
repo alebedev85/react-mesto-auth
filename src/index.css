@@ -35,9 +35,6 @@
 @import url(./blocks/element/__like-counter/element__like-counter.css);
 @import url(./blocks/element/__trash-button/element__trash-button.css);
 
-/*authentication*/
-@import url(./blocks/authentication/authentication.css);
-
 /* Footer */
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);
@@ -65,6 +62,18 @@
 @import url(./blocks/popup/__field/popup__field.css);
 @import url(./blocks/popup/__info-pic/popup__info-pic.css);
 @import url(./blocks/popup/__title_info/popup__title_info.css);
+
+/*Authentication*/
+@import url(./blocks/authentication/authentication.css);
+@import url(./blocks/authentication/__container/authentication__container.css);
+@import url(./blocks/authentication/__title/authentication__title.css);
+@import url(./blocks/authentication/__form/authentication__form.css);
+@import url(./blocks/authentication/__fieldset/authentication__fieldset.css);
+@import url(./blocks/authentication/__field/authentication__field.css);
+@import url(./blocks/authentication/__input/authentication__input.css);
+@import url(./blocks/authentication/__submit-button/authentication__submit-button.css);
+@import url(./blocks/authentication/__link/authentication__link.css);
+@import url(./blocks/authentication/__link/authentication__input-error.css);
 
 /*Delete form*/
 @import url(./blocks/popup/__container/_type_delete/popup__container_type_delete.css);
