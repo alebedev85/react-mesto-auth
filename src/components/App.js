@@ -34,7 +34,6 @@ function App() {
 
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false); //State for InfoTooltipOpen
   const [isSuccess, setSucces] = React.useState(false);
-  const [isRegNav, setRegNav] = React.useState(false);
   const [token, setToken] = React.useState();
 
   const [isLoading, setIsLoading] = React.useState(false); //State for standart button text
@@ -43,9 +42,7 @@ function App() {
   const [isLoggedIn, setLoggedIn] = React.useState(false);
   const navigate = useNavigate();
 
-  function handlerRegNav() {
-    setRegNav(true);
-  }
+
   /**
    * Handler to user registration
    * @param {string} name - new name.
