@@ -74,7 +74,7 @@
   font-size: 14px;
   line-height: 17px;
   border: none;
-  border-bottom: 1px solid #CCCCCC;
+  border-bottom: 2px solid #CCCCCC;
   background-color: transparent;
   color: inherit;
   outline: none;
@@ -82,6 +82,10 @@
   padding-bottom: 8px;
   height: 17px;
   margin-bottom: 31px;
+}
+
+.authentication__input:focus {
+  border-bottom: 2px solid blue;
 }
 
 .authentication__submit-button {

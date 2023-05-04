@@ -32,8 +32,9 @@ function App() {
   const [deletedCard, setDeletedCard] = React.useState({}); //State for deleted card for ImagePopup
 
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false); //State for InfoTooltipOpen
-  const [isSuccess, setSucces] =React.useState(false);
-  const [isRegNav, setRegNav] =React.useState(false);
+  const [isSuccess, setSucces] = React.useState(false);
+  const [isRegNav, setRegNav] = React.useState(false);
+  const [token, setToken] = React.useState();
 
   const [isLoading, setIsLoading] = React.useState(false); //State for standart button text
 
@@ -60,7 +61,7 @@ function App() {
         console.log(err)
         setSucces(false);
       })
-    .finally(() => setInfoTooltipOpen(true));
+      .finally(() => setInfoTooltipOpen(true));
   }
 
   /**
@@ -73,8 +74,8 @@ function App() {
     authApi.authorize(email, password)
       .then(({ token }) => {
         localStorage.setItem('jwt', token);
-        setLoggedIn(true);
-        navigate('/', { replace: true });
+        // setLoggedIn(true);
+        setToken(token)
       })
       .catch(err => {
         console.log(err)
@@ -96,22 +97,47 @@ function App() {
     if (jwt) {
       authApi.getUserData(jwt)
         .then((res) => {
+          console.log(res)
           if (res) {
-            console.log(res)
+
             const data = res.data;
             setUserData({ email: data.email, _id: data._id });
             setLoggedIn(true);
+            console.log(isLoggedIn)
           }
         })
         .catch(err => {
           console.log(err)
         })
     }
+    console.log(isLoggedIn)
   }
 
   React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    console.log(isLoggedIn)
+    if (jwt) {
+      authApi.getUserData(jwt)
+        .then((res) => {
+          console.log(res)
+          if (res) {
+            const data = res.data;
+            setUserData({ email: data.email, _id: data._id });
+            setLoggedIn(true);
+            navigate('/', { replace: true });
+            console.log(isLoggedIn)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+    console.log(isLoggedIn)
+  }, [token]);
 
-    tokenCheck()
+  React.useEffect(() => {
+
+    // tokenCheck()
 
     //Get user info
     api.getCurrentUser()
