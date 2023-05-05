@@ -89,56 +89,54 @@ function App() {
     navigate('/sign-up', { replace: true });
   }
 
-  function tokenCheck() {
-    const jwt = localStorage.getItem('jwt');
-    console.log(isLoggedIn)
-    if (jwt) {
-      authApi.getUserData(jwt)
-        .then((res) => {
-          console.log(res)
-          if (res) {
+  // function tokenCheck() {
+  //   const jwt = localStorage.getItem('jwt');
+  //   console.log(isLoggedIn)
+  //   if (jwt) {
+  //     authApi.getUserData(jwt)
+  //       .then((res) => {
+  //         console.log(res)
+  //         if (res) {
 
-            const data = res.data;
-            setUserData({ email: data.email, _id: data._id });
-            setLoggedIn(true);
-            console.log(isLoggedIn)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-    console.log(isLoggedIn)
-  }
+  //           const data = res.data;
+  //           setUserData({ email: data.email, _id: data._id });
+  //           setLoggedIn(true);
+  //           console.log(isLoggedIn)
+  //         }
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //       })
+  //   }
+  //   console.log(isLoggedIn)
+  // }
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    console.log(isLoggedIn)
-    if (jwt) {
-      authApi.getUserData(jwt)
+    if (token) {
+      authApi.getUserData(token)
         .then((res) => {
-          console.log(res)
           if (res) {
             const data = res.data;
             setUserData({ email: data.email, _id: data._id });
             setLoggedIn(true);
             navigate('/', { replace: true });
-            console.log(isLoggedIn)
           }
         })
         .catch(err => {
           console.log(err)
         })
     }
-    console.log(isLoggedIn)
+
   }, [token]);
 
   React.useEffect(() => {
 
     // tokenCheck()
-
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) setToken(jwt)
     //Get user info
     api.getCurrentUser()
+
       .then((res) => {
         setCurrentUser(res); //Set currentUser
       })
