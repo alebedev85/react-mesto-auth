@@ -24,11 +24,12 @@ export default function InfoTooltip({ name, isOpen, onClose,isSuccess }) {
       document.removeEventListener('keyup', handleEscClose);
     }
   }, [isOpen]);
+  
   return (
     <div className={`popup popup_type_${name} ${isOpen && ('popup_opened')}`} onClick={handleOverlayClose}>
       <div className="popup__container popup__container_type_info">
         <button className="popup__close-button" type="button" onClick={onClose} />
-        <img className="popup__info-pic"  src={massageImg} />
+        <img className="popup__info-pic"  src={massageImg} alt='Инфо-изображение'/>
         <h2 className="popup__title popup__title_info">{massageText}</h2>
       </div>
     </div>

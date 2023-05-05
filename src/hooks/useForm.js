@@ -1,6 +1,6 @@
 import { useState } from "react"
 /**
- * Hook for form parameter
+ * Hook for form processing
  * @param {object} initialState - initial data
  * @returns form - state, handleChange - function
  */

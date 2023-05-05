@@ -95,28 +95,6 @@ function App() {
     navigate('/sign-up', { replace: true });
   }
 
-  // function tokenCheck() {
-  //   const jwt = localStorage.getItem('jwt');
-  //   console.log(isLoggedIn)
-  //   if (jwt) {
-  //     authApi.getUserData(jwt)
-  //       .then((res) => {
-  //         console.log(res)
-  //         if (res) {
-
-  //           const data = res.data;
-  //           setUserData({ email: data.email, _id: data._id });
-  //           setLoggedIn(true);
-  //           console.log(isLoggedIn)
-  //         }
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //       })
-  //   }
-  //   console.log(isLoggedIn)
-  // }
-
   // Check token function
   React.useEffect(() => {
     if (token) {
