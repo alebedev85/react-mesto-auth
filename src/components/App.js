@@ -33,13 +33,13 @@ function App() {
   const [deletedCard, setDeletedCard] = React.useState({}); //State for deleted card for ImagePopup
 
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false); //State for InfoTooltipOpen
-  const [isSuccess, setSucces] = React.useState(false);
-  const [token, setToken] = React.useState();
+  const [isSuccess, setSucces] = React.useState(false); //State for seccessfull registration or login
+  const [token, setToken] = React.useState(); //State for token
 
   const [isLoading, setIsLoading] = React.useState(false); //State for standart button text
 
-  const [userData, setUserData] = React.useState({ email: '', _id: '' });
-  const [isLoggedIn, setLoggedIn] = React.useState(false);
+  const [userData, setUserData] = React.useState({ email: '', _id: '' });//State for user regiztration data
+  const [isLoggedIn, setLoggedIn] = React.useState(false); //State logged in user
   const navigate = useNavigate();
 
 
@@ -68,12 +68,15 @@ function App() {
   * @param {string} description - new description.
   */
   function handlerLogIn({ email, password }) {
-
     authApi.authorize(email, password)
       .then(({ token }) => {
-        localStorage.setItem('jwt', token);
-        // setLoggedIn(true);
-        setToken(token)
+        if (token) {
+          localStorage.setItem('jwt', token);
+          setToken(token)
+        } else {
+          setSucces(false);
+          setInfoTooltipOpen(true);
+        }
       })
       .catch(err => {
         console.log(err)
@@ -82,6 +85,9 @@ function App() {
       })
   }
 
+  /**
+   * logOut function
+   */
   function logOut() {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
@@ -111,6 +117,7 @@ function App() {
   //   console.log(isLoggedIn)
   // }
 
+  // Check token function
   React.useEffect(() => {
     if (token) {
       authApi.getUserData(token)
@@ -126,17 +133,16 @@ function App() {
           console.log(err)
         })
     }
-
   }, [token]);
 
   React.useEffect(() => {
 
-    // tokenCheck()
+    // Check token
     const jwt = localStorage.getItem('jwt');
-    if (jwt) setToken(jwt)
+    if (jwt) setToken(jwt);
+
     //Get user info
     api.getCurrentUser()
-
       .then((res) => {
         setCurrentUser(res); //Set currentUser
       })
@@ -215,7 +221,6 @@ function App() {
   function handleCardLike(card) {
     //is it my like?
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-
     api.changeLikeCardStatus(card._id, isLiked)
       .then(newCard => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
