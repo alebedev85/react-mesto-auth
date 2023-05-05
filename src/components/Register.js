@@ -51,7 +51,7 @@ export default function Register({ regUser }) {
           </fieldset>
         </form>
         <div className="authentication__link">
-          <Link to='/mesto-react/sign-in' className="navbar__link">Уже зарегистрированы? Войти</Link>
+          <Link to='/sign-in' className="navbar__link">Уже зарегистрированы? Войти</Link>
         </div>
       </div>
     </div >
