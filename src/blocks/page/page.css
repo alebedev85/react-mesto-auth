@@ -8,8 +8,6 @@
   text-rendering: optimizeLegibility;
   background-color: #000000;
   color: #FFFFFF;
-  height: 100vh;
-
 }
 
 @media screen and (max-width: 635px) {
