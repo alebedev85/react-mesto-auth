@@ -1,7 +1,7 @@
 import useForm from "../hooks/useForm"
 import { Link } from "react-router-dom"
 
-export default function Register({ regUser }) {
+export default function Register({ onRegister }) {
   const { form, handleChange, errors } = useForm({
     email: '',
     password: '',
@@ -9,7 +9,7 @@ export default function Register({ regUser }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    regUser(form)
+    onRegister(form)
   }
   return (
     <div className={"authentication"}>

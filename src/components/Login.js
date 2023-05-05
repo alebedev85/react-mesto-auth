@@ -1,6 +1,6 @@
 import useForm from "../hooks/useForm"
 
-export default function Login({ loginUser }) {
+export default function Login({ onLogin }) {
   const  {form, handleChange, errors} = useForm({
     email: '',
     password: ''
@@ -8,7 +8,7 @@ export default function Login({ loginUser }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    loginUser(form)
+    onLogin(form)
   }
 
   return (

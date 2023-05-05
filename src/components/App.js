@@ -293,9 +293,9 @@ function App() {
           <Routes>
             <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} />
             <Route path="/sign-in" element={
-              <Login loginUser={handlerLogIn} />} />
+              <Login onLogin={handlerLogIn} />} />
             <Route path="/sign-up" element={
-              <Register regUser={handlerRegUser} />} />
+              <Register onRegister={handlerRegUser} />} />
             <Route path="/" element={<ProtectedRouteElement element={Main}
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
