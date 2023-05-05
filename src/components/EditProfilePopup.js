@@ -8,6 +8,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser, button
 
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const [errors, setErrors] = React.useState({});
 
   React.useEffect(() => {
     setName(currentUser.name);
@@ -19,6 +20,10 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser, button
    * */
   function handleNameChange(e) {
     setName(e.target.value);
+    setErrors({
+      ...errors,
+      [e.target.name]: e.target.validationMessage
+    })
   }
 
   /**
@@ -26,6 +31,10 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser, button
    * */
   function handleDescriptionChange(e) {
     setDescription(e.target.value);
+    setErrors({
+      ...errors,
+      [e.target.name]: e.target.validationMessage
+    })
   }
 
   /**
@@ -51,13 +60,13 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser, button
             className="popup__input popup__input_input_name"
             type="text"
             placeholder="Ваше имя"
-            name="inputName"
+            name="name"
             minLength="2"
             maxLength="40"
             value={name}
             onChange={handleNameChange}
             required />
-          <span className="popup__input-error name-input-error"></span>
+          <span className="popup__input-error name-input-error">{errors.name}</span>
         </div>
         <div className="popup__field">
           <input
@@ -65,13 +74,13 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser, button
             className="popup__input popup__input_input_job"
             type="text"
             placeholder="Ваше занятие"
-            name="inputJob"
+            name="description"
             minLength="2"
             maxLength="200"
             value={description}
             onChange={handleDescriptionChange}
             required />
-          <span className="popup__input-error job-input-error"></span>
+          <span className="popup__input-error job-input-error">{errors.description}</span>
         </div>
     </PopupWithForm>
   )

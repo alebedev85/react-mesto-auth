@@ -5,12 +5,17 @@ export default function AddPlacePopup({ isOpen, onClose, onAddNewPlace, buttonTe
 
   const [name, setName] = React.useState('');
   const [link, setLink] = React.useState('');
+  const [errors, setErrors] = React.useState({});
 
   /**
      * Hendler for place name input
      * */
   function handlePlaceNameChange(e) {
     setName(e.target.value);
+    setErrors({
+      ...errors,
+      [e.target.name]: e.target.validationMessage
+    })
   }
 
   /**
@@ -18,6 +23,10 @@ export default function AddPlacePopup({ isOpen, onClose, onAddNewPlace, buttonTe
    * */
   function handlePlaceLinkChange(e) {
     setLink(e.target.value);
+    setErrors({
+      ...errors,
+      [e.target.name]: e.target.validationMessage
+    })
   }
 
   /**
@@ -48,13 +57,13 @@ export default function AddPlacePopup({ isOpen, onClose, onAddNewPlace, buttonTe
           className="popup__input popup__input_input_place"
           type="text"
           placeholder="Название"
-          name="cardNameImput"
+          name="placeName"
           minLength="2"
           maxLength="30"
           value={name}
           onChange={handlePlaceNameChange}
           required />
-        <span className="popup__input-error place-input-error"></span>
+        <span className="popup__input-error place-input-error">{errors.placeName}</span>
       </div>
       <div className="popup__field">
         <input
@@ -62,11 +71,11 @@ export default function AddPlacePopup({ isOpen, onClose, onAddNewPlace, buttonTe
           className="popup__input popup__input_input_link"
           type="url"
           placeholder="Ссылка на картинку"
-          name="cardLinkImput"
+          name="placeLink"
           value={link}
           onChange={handlePlaceLinkChange}
           required />
-        <span className="popup__input-error link-input-error"></span>
+        <span className="popup__input-error link-input-error">{errors.placeLink}</span>
       </div>
     </PopupWithForm>
   )
