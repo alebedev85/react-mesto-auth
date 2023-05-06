@@ -1,7 +1,8 @@
 import useForm from "../hooks/useForm"
 import { Link } from "react-router-dom"
 
-export default function Register({ onRegister }) {
+export default function Register({ onRegister, buttonText }) {
+  
   const { form, handleChange, errors } = useForm({
     email: '',
     password: '',
@@ -28,8 +29,7 @@ export default function Register({ onRegister }) {
                 maxLength="40"
                 value={form.email}
                 onChange={handleChange}
-                required
-                noValidate />
+                required />
               <span className="authentication__input-error">{errors.email}</span>
             </div>
             <div className="authentication__field">
@@ -43,11 +43,10 @@ export default function Register({ onRegister }) {
                 maxLength="200"
                 value={form.password}
                 onChange={handleChange}
-                required
-                noValidate />
+                required />
               <span className="authentication__input-error">{errors.password}</span>
             </div>
-            <button className="authentication__submit-button" type="submit" name="authenticationSubmit">Зарегистрироваться</button>
+            <button className="authentication__submit-button" type="submit" name="authenticationSubmit">{buttonText}</button>
           </fieldset>
         </form>
         <div className="authentication__link">

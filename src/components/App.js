@@ -49,17 +49,24 @@ function App() {
    * @param {string} description - new description.
    */
   function handlerRegUser({ email, password }) {
+    setIsLoading(true);
     authApi.register(email, password)
+      .then((res) => {
+        if (res.ok) return res
+      })
       .then(({ data }) => {
         setUserData({ email: data.email, _id: data._id });
         setSucces(true);
         navigate('/sign-in', { replace: true });
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
         setSucces(false);
       })
-      .finally(() => setInfoTooltipOpen(true));
+      .finally(() => {
+        setIsLoading(false);
+        setInfoTooltipOpen(true);
+      });
   }
 
   /**
@@ -68,21 +75,21 @@ function App() {
   * @param {string} description - new description.
   */
   function handlerLogIn({ email, password }) {
+    setIsLoading(true);
     authApi.authorize(email, password)
+      .then((res) => {
+        if (res.ok) return res
+      })
       .then(({ token }) => {
-        if (token) {
-          localStorage.setItem('jwt', token);
-          setToken(token)
-        } else {
-          setSucces(false);
-          setInfoTooltipOpen(true);
-        }
+        localStorage.setItem('jwt', token);
+        setToken(token)
       })
       .catch(err => {
         console.log(err)
         setSucces(false);
         setInfoTooltipOpen(true);
       })
+      .finally(() => setIsLoading(false))
   }
 
   /**
@@ -95,12 +102,12 @@ function App() {
     navigate('/sign-up', { replace: true });
   }
 
-  // Check token function
+  // Check token 
   React.useEffect(() => {
     if (token) {
       authApi.getUserData(token)
         .then((res) => {
-          if (res) {
+          if (res.ok) {
             const data = res.data;
             setUserData({ email: data.email, _id: data._id });
             setLoggedIn(true);
@@ -293,10 +300,16 @@ function App() {
           <Routes>
             <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-in" replace />} />
             <Route path="/sign-in" element={
-              <Login onLogin={handlerLogIn} />} />
+              <Login
+                onLogin={handlerLogIn}
+                buttonText={isLoading ? 'Войти...' : 'Войти'} />}
+            />
             <Route path="/sign-up" element={
-              <Register onRegister={handlerRegUser} />} />
-            <Route path="/" element={<ProtectedRouteElement element={Main}
+              <Register
+                onRegister={handlerRegUser}
+                buttonText={isLoading ? 'Зарегистрироваться...' : 'Зарегистрироваться'} />} />
+            <Route path="/" element={<ProtectedRouteElement
+              element={Main}
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
               onEditAvatar={handleEditAvatarClick}
