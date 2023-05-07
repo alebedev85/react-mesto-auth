@@ -23,7 +23,10 @@ const makeRequest = (url, method, body, token) => {
   }
   return fetch(`${BASE_URL}/${url}`, options)
     .then((res) => {
-      if (res.ok) return res.json()
+      if (!res.ok) {
+        throw new Error('Error occurred!')
+      }
+      return res.json()
     })
 }
 
