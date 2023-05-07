@@ -51,9 +51,6 @@ function App() {
   function handlerRegUser({ email, password }) {
     setIsLoading(true);
     authApi.register(email, password)
-      .then((res) => {
-        if (res.ok) return res
-      })
       .then(({ data }) => {
         setUserData({ email: data.email, _id: data._id });
         setSucces(true);
@@ -77,9 +74,6 @@ function App() {
   function handlerLogIn({ email, password }) {
     setIsLoading(true);
     authApi.authorize(email, password)
-      .then((res) => {
-        if (res.ok) return res
-      })
       .then(({ token }) => {
         localStorage.setItem('jwt', token);
         setToken(token)
@@ -102,17 +96,15 @@ function App() {
     navigate('/sign-up', { replace: true });
   }
 
-  // Check token 
+  // Check token
   React.useEffect(() => {
     if (token) {
       authApi.getUserData(token)
         .then((res) => {
-          if (res.ok) {
             const data = res.data;
             setUserData({ email: data.email, _id: data._id });
             setLoggedIn(true);
             navigate('/', { replace: true });
-          }
         })
         .catch(err => {
           console.log(err)
