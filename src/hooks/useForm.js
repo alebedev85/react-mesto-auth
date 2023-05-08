@@ -21,5 +21,10 @@ export default function useForm (initialState) {
     })
   }
 
+  // const handleChange = (event) => {
+  //   const {value, name} = event.target;
+  //   setValues({...values, [name]: value});
+  // };
+
   return {form, handleChange, errors}
 }
