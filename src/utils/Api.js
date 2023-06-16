@@ -144,4 +144,4 @@ class Api {
   }
 }
 
-export const api = new Api('https://mesto.nomoreparties.co/v1/cohort-61', '3e070c18-b10f-4e80-b715-68fa3cc00268');
+export const api = new Api('http://nexus.andrey.mesto.nomoredomains.rocks', '3e070c18-b10f-4e80-b715-68fa3cc00268');
