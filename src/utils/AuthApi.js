@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://nexus.andrey.mesto.nomoredomains.rocks';
+export const BASE_URL = 'https://auth.nomoreparties.co';;
 
 /**
    * Common request funstion
