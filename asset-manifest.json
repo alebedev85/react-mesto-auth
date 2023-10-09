@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/react-mesto-auth/static/css/main.c47ff6d2.css",
-    "main.js": "/react-mesto-auth/static/js/main.628c7306.js",
+    "main.css": "/react-mesto-auth/static/css/main.896e7dd4.css",
+    "main.js": "/react-mesto-auth/static/js/main.545efdff.js",
     "static/js/787.5530211c.chunk.js": "/react-mesto-auth/static/js/787.5530211c.chunk.js",
     "static/media/Inter-Medium.woff?v=3.19": "/react-mesto-auth/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
     "static/media/Inter-Black.woff?v=3.19": "/react-mesto-auth/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -11,21 +11,21 @@
     "static/media/Inter-Regular.woff2?v=3.19": "/react-mesto-auth/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
     "static/media/Logo.svg": "/react-mesto-auth/static/media/Logo.bbe2a6eafac19c3d031c272c424875ca.svg",
     "static/media/heart.svg": "/react-mesto-auth/static/media/heart.1ad06e85f169668a1f36.svg",
-    "static/media/fail.svg": "/react-mesto-auth/static/media/fail.df8eddf661ff88f2d0efd3d570d14309.svg",
+    "static/media/fail.svg": "/react-mesto-auth/static/media/fail.d4ce2a261b68c6da973d51ef98afae1a.svg",
     "static/media/Trash.svg": "/react-mesto-auth/static/media/Trash.ce3b64935accf9b8212e.svg",
-    "static/media/success.svg": "/react-mesto-auth/static/media/success.1b6082f862eac35e2514460237d96ecc.svg",
+    "static/media/success.svg": "/react-mesto-auth/static/media/success.a9eb6caf1da3ff48b215fb1dd9477d74.svg",
     "static/media/heart_activ.svg": "/react-mesto-auth/static/media/heart_activ.35948469632d0421d697.svg",
     "index.html": "/react-mesto-auth/index.html",
     "static/media/Edit-Button.svg": "/react-mesto-auth/static/media/Edit-Button.6c7bf05444b9793fdf6e.svg",
-    "static/media/AvatatEditor.svg": "/react-mesto-auth/static/media/AvatatEditor.a086f758840ae814ecde.svg",
+    "static/media/AvatatEditor.svg": "/react-mesto-auth/static/media/AvatatEditor.ae1a976ddb506239e9f0.svg",
     "static/media/Close-Button.svg": "/react-mesto-auth/static/media/Close-Button.039f1f5203f653b4bacd.svg",
     "static/media/Add-Button.svg": "/react-mesto-auth/static/media/Add-Button.bed8c136e13907f5eefb.svg",
-    "main.c47ff6d2.css.map": "/react-mesto-auth/static/css/main.c47ff6d2.css.map",
-    "main.628c7306.js.map": "/react-mesto-auth/static/js/main.628c7306.js.map",
+    "main.896e7dd4.css.map": "/react-mesto-auth/static/css/main.896e7dd4.css.map",
+    "main.545efdff.js.map": "/react-mesto-auth/static/js/main.545efdff.js.map",
     "787.5530211c.chunk.js.map": "/react-mesto-auth/static/js/787.5530211c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c47ff6d2.css",
-    "static/js/main.628c7306.js"
+    "static/css/main.896e7dd4.css",
+    "static/js/main.545efdff.js"
   ]
 }
